@@ -9,16 +9,25 @@ array_funcionarios = [nome_funcionario]
 data_aniversario_funcionario = datetime.strptime(
     input("Infome a sua data de nascimento: "), '%d/%m/%Y')
 idade_funcionario = datetime.today() - data_aniversario_funcionario
-resultado_idade_funcionario = "%.0f" % float(idade_funcionario.days / 365)
+resultado_idade_funcionario = int("%.0f" % float(idade_funcionario.days / 365))
 
 # Neste bloco é definido a data de registro do funcionario e é gerado o seu crachá
 data_registro = strftime("%d %b %Y", localtime())
 cracha_aleatorio = random.randint(1, 9999)
+turno_aleatorio = ["Diurno | 08:00 ás 15:00", "Noturno | 19:00 ás 02:00 "]
 cadastro_finalizado = ("\nOlá " + nome_funcionario + ", Seu Registro foi concluido com SUCESSO no dia " +
                        (data_registro) + " O seu número de crachá virtual foi gerado: " + str(cracha_aleatorio))
 print(cadastro_finalizado)
 
-# print(array_funcionarios)
-# print(resultado_idade_funcionario)
-# print(data_registro)
-# print(nome_funcionario)
+if resultado_idade_funcionario <= 21:
+    print("Você Irá trabalhar como Estagiario")
+elif resultado_idade_funcionario >= 22:
+    print("Você irá trabalhar como Operador I")
+
+if resultado_idade_funcionario >= 22 and cracha_aleatorio >= 5000:
+    print(random.choice(turno_aleatorio))
+
+    # print(array_funcionarios)
+    # print(resultado_idade_funcionario)
+    # print(data_registro)
+    # print(nome_funcionario)
