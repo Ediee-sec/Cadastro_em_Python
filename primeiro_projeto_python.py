@@ -8,8 +8,8 @@ array_funcionarios = [nome_funcionario]
 # Neste bloco é guardado a data de nascimento do funcionario,
 data_aniversario_funcionario = datetime.strptime(
     input("Infome a sua data de nascimento: "), '%d/%m/%Y')
-data_hoje = datetime.today()
-idade_funcionario = data_hoje - data_aniversario_funcionario
+idade_funcionario = datetime.today() - data_aniversario_funcionario
+resultado_idade_funcionario = "%.0f" % float(idade_funcionario.days / 365)
 
 # Neste bloco é definido a data de registro do funcionario e é gerado o seu crachá
 data_registro = strftime("%d %b %Y", localtime())
@@ -19,6 +19,6 @@ cadastro_finalizado = ("\nOlá " + nome_funcionario + ", Seu Registro foi conclu
 print(cadastro_finalizado)
 
 # print(array_funcionarios)
-# print(idade_funcionario)
+# print(resultado_idade_funcionario)
 # print(data_registro)
 # print(nome_funcionario)
