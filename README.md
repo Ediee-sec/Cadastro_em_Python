@@ -34,6 +34,31 @@ while loguin_usuario is senha_usuario == '':
         print("\nErro ao cadastar loguin, Tente novamente\n")
 ```
 
+3. *Função para logar o usuario no sistema, verifica se o login e senha são os mesmos do cadastro*
+```
+def login_sistema():
+
+    while True:
+
+        print("\nLogin no Sistema")
+        nome = input("Digite aqui seu login: ")
+        senha = input("Digite aqui sua senha: ")
+
+        if nome == login_usuario:
+            if senha == senha_usuario:
+                print("Login Realizado com sucesso")
+                break
+            else:
+                print("Houve um problema, porfavor tente novamente!")
+                continue
+        else:
+            print("Houve um problema, porfavor tente novamente!")
+            continue
+
+
+login_sistema()
+```
+
 * ## *Updates:*
 1.0 | 29/01/2021 - Otimização do código, encurtado utilizando a semântica correta da linguagem.
 
@@ -41,4 +66,6 @@ while loguin_usuario is senha_usuario == '':
 
 1.2 | 30/01/2021 - Adionado documentação do código em Markedowm
 
-1.3 | 30/01/2021 - Adicionado Sistema de loguin
+1.3 | 30/01/2021 - Adicionado cadastro no sistema interno
+
+1.4 | 01/02/2021 - Adcionado sistema de login no sistema interno
