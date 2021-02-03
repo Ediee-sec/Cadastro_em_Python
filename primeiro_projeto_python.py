@@ -9,8 +9,7 @@ array_funcionarios = [nome_funcionario]
 data_aniversario_funcionario = datetime.strptime(
     input("Infome a sua data de nascimento: "), '%d/%m/%Y')
 idade_funcionario = datetime.today() - data_aniversario_funcionario
-resultado_idade_funcionario = int(
-    "%.0f" % float(idade_funcionario.days / 365))
+resultado_idade_funcionario = int("%.0f" % float(idade_funcionario.days / 365))
 
 # Neste bloco sera feito o loguin de usuario para acessar o sistema interno
 login_usuario = ''
@@ -66,6 +65,10 @@ def login_sistema():
 
 login_sistema()
 
+
+# Adcionar aqui informações do funcionario, caso o login dele no sistema foi True
+def info_funcionario():
+    pass
 
 # print(array_funcionarios)
 # print(resultado_idade_funcionario)
