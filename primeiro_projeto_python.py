@@ -44,8 +44,9 @@ def data_registro_cracha_turno():
     data_registro = strftime("%d %b %Y", localtime())
     cracha_aleatorio = random.randint(1, 9999)
     turno_aleatorio = ["Diurno | 08:00 ás 15:00", "Noturno | 19:00 ás 02:00 "]
-    cadastro_finalizado = ("\nOlá " + nome_funcionario + ", Seu Registro foi concluido com SUCESSO no dia " +
-                           (data_registro) + " O seu número de crachá virtual foi gerado: " + str(cracha_aleatorio))
+    cadastro_finalizado = (
+        f'Olá {nome_funcionario}, o seu registro foi concluido com SUCESSO no dia {data_registro}, O seu número de crachá virtual foi gerado : {cracha_aleatorio}')
+
     print(cadastro_finalizado)
 
     if resultado_idade_funcionario <= 21:
