@@ -13,8 +13,8 @@ def idade_aniversario_func():
         input("Infome a sua data de nascimento: "), '%d/%m/%Y')
     idade_funcionario = datetime.today() - data_aniversario_funcionario
     global resultado_idade_funcionario
-    resultado_idade_funcionario = int(
-        "%.0f" % float(idade_funcionario.days / 365))
+    resultado_idade_funcionario = float(
+        "%.1f" % float(idade_funcionario.days / 365))
 
 
 idade_aniversario_func()
@@ -28,7 +28,7 @@ def cadastro_no_sistema():
     senha_usuario = ''
     while login_usuario is senha_usuario == '':
         login_usuario = input("Escolha o Nickname: ")
-        senha_usuario = input("Escola uma senha: ")
+        senha_usuario = input("Escolha uma senha: ")
 
         if login_usuario and senha_usuario != '':
             print("Cadastro de úsuario realizado com sucesso")
@@ -41,6 +41,9 @@ cadastro_no_sistema()
 
 # Função para armazenar a data de registro do funcionário + sortear um crachá aleatório + sortear um turno baseado na função idade_aniversario_func()
 def data_registro_cracha_turno():
+    global data_registro
+    global cracha_aleatorio
+
     data_registro = strftime("%d %b %Y", localtime())
     cracha_aleatorio = random.randint(1, 9999)
     turno_aleatorio = ["Diurno | 08:00 ás 15:00", "Noturno | 19:00 ás 02:00 "]
@@ -71,7 +74,6 @@ def login_sistema():
         print("\nLogin no Sistema")
         nome = input("Digite aqui seu login: ")
         senha = input("Digite aqui sua senha: ")
-
         if nome == login_usuario:
             if senha == senha_usuario:
                 print("Login Realizado com sucesso")
@@ -87,11 +89,23 @@ def login_sistema():
 login_sistema()
 
 
-# Adcionar aqui informações do funcionario, caso o login dele no sistema foi True
-def info_funcionario():
-    pass
+# informações pessoais do funcionario
+def painel_sistema():
+    print(f'\nBem Vindo ao sistema interno {login_usuario}')
+    print(f'\nNome: {nome_funcionario}')
+    print(f'idade: {resultado_idade_funcionario}')
+    print(f'Crachá Virtual: {cracha_aleatorio}')
+    print(f'Data de contratação: {data_registro}')
 
-# print(array_funcionarios)
-# print(resultado_idade_funcionario)
-# print(data_registro)
-# print(nome_funcionario)
+
+painel_sistema()
+
+
+# Dicionario com informações do funcionario
+def dicionario_do_funcionario():
+    dicionario = dict(nome=nome_funcionario,
+                      idade=resultado_idade_funcionario, login=login_usuario)
+    # print(dicionario)
+
+
+dicionario_do_funcionario()
