@@ -2,8 +2,11 @@ from time import strftime, localtime
 from datetime import datetime
 import random
 
-nome_funcionario = input("Digite o seu Nome e Sobrenome: ")
-array_funcionarios = [nome_funcionario]
+try:
+    nome_funcionario = str(input("Digite o seu Nome e Sobrenome: "))
+    array_funcionarios = [nome_funcionario]
+except:
+    print("Error: Apenas Letras é permitido")
 
 
 # Esta função armazena a data de nascimento do úsuario e faz o calculo para determinar a sua idade.
@@ -28,7 +31,15 @@ def cadastro_no_sistema():
     senha_usuario = ''
     while login_usuario is senha_usuario == '':
         login_usuario = input("Escolha o Nickname: ")
-        senha_usuario = input("Escolha uma senha: ")
+
+        while True:
+            try:
+                senha_usuario = int(
+                    input("Escolha uma senha [Apenas números]: "))
+                break
+            except ValueError:
+                print("Error: 001 (Sua senha deve possuir apenas números)")
+                continue
 
         if login_usuario and senha_usuario != '':
             print("Cadastro de úsuario realizado com sucesso")
@@ -37,6 +48,18 @@ def cadastro_no_sistema():
 
 
 cadastro_no_sistema()
+
+
+# Função para uma futura altualização do sistema, não deixará que tenha mais de 2 nicknames iguais no sistema
+def verificacao_nickname_duplo():
+    login_duplicado = [login_usuario]
+    set_login = set(login_duplicado)
+
+    set_login.add(login_usuario)
+    # print(set_login)
+
+
+verificacao_nickname_duplo()
 
 
 # Função para armazenar a data de registro do funcionário + sortear um crachá aleatório + sortear um turno baseado na função idade_aniversario_func()
@@ -73,7 +96,16 @@ def login_sistema():
 
         print("\nLogin no Sistema")
         nome = input("Digite aqui seu login: ")
-        senha = input("Digite aqui sua senha: ")
+
+        while True:
+            try:
+                senha = int(
+                    input("Digite aqui a sua senha: "))
+                break
+            except ValueError:
+                print("Error: 001 (Sua senha deve possuir apenas números)")
+                continue
+
         if nome == login_usuario:
             if senha == senha_usuario:
                 print("Login Realizado com sucesso")

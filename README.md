@@ -1,9 +1,13 @@
 ## Sistema de cadastramento
+
 * #### *Contexto da aplicação:*
+
 *Programa que cadastra x Funcionários, no sistema interno da empresa, solicita ao úsuario informações e com essas informações toma ações, baseadas nos dados do funcionário*
 
 * #### *Mapa do código:*
+
 1. *Bloco de código que apartir da informação do úsuario. faz o calculo para identicar a sua idade*
+
 ```Python
 data_aniversario_funcionario = datetime.strptime(
    input("Infome a sua data de nascimento: "), '%d/%m/%Y')
@@ -12,6 +16,7 @@ resultado_idade_funcionario = int("%.0f" % float(idade_funcionario.days / 365))
 ``` 
 
 2. *Bloco de código que define com base nas informações do funcionário, o crachá dele, periodo em que irá trabalhar e sua função dentro da empresa*
+
 ```Python
 data_registro = strftime("%d %b %Y", localtime())
 cracha_aleatorio = random.randint(1, 9999)
@@ -21,6 +26,7 @@ cadastro_finalizado = ("\nOlá " + nome_funcionario + ", Seu Registro foi conclu
 ```
 
 3. *Bloco de código que faz o cadastramento do login do úsuario ao sistema; OBS:A semântica não está da forma que tem que estar, tem que arrumar*
+
 ```Python
 loguin_usuario = ''
 senha_usuario = ''
@@ -34,7 +40,8 @@ while loguin_usuario is senha_usuario == '':
         print("\nErro ao cadastar login, Tente novamente\n")
 ```
 
-3. *Função para logar o usuario no sistema, verifica se o login e senha são os mesmos do cadastro*
+4. *Função para logar o usuario no sistema, verifica se o login e senha são os mesmos do cadastro*
+
 ```Python
 def login_sistema():
 
@@ -60,6 +67,7 @@ login_sistema()
 ```
 
 * ## *Updates:*
+
 1.0 | 29/01/2021 - Otimização do código, encurtado utilizando a semântica correta da linguagem.
 
 1.1 | 29/01/2021 - Adicionado as condicionais [if-elif-else]
@@ -68,4 +76,8 @@ login_sistema()
 
 1.3 | 30/01/2021 - Adicionado cadastro no sistema interno
 
-1.4 | 01/02/2021 - Adcionado sistema de login no sistema interno
+1.4 | 01/02/2021 - Adicionado sistema de login no sistema interno
+
+1.5 | 04/02/2021 - Adicionado painel com informações do funcionario caso o login for True, criando um dicionário para a aplicação
+
+1.6 | 09/02/2021 - Adcionado exeções para tratar possíveis erros
