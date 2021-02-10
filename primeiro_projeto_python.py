@@ -1,12 +1,14 @@
+# %%
 from time import strftime, localtime
 from datetime import datetime
+import logging
 import random
 
-try:
-    nome_funcionario = str(input("Digite o seu Nome e Sobrenome: "))
-    array_funcionarios = [nome_funcionario]
-except:
-    print("Error: Apenas Letras é permitido")
+logging.basicConfig(level=logging.DEBUG, filename='registro.log',
+                    filemode='a', format='%(levelname)s - %(message)s - %(asctime)s')
+
+nome_funcionario = input("Digite o seu Nome e Sobrenome: ")
+array_funcionarios = [nome_funcionario]
 
 
 # Esta função armazena a data de nascimento do úsuario e faz o calculo para determinar a sua idade.
@@ -37,14 +39,19 @@ def cadastro_no_sistema():
                 senha_usuario = int(
                     input("Escolha uma senha [Apenas números]: "))
                 break
-            except ValueError:
+            except ValueError as error:
                 print("Error: 001 (Sua senha deve possuir apenas números)")
+                logging.warning(error)
                 continue
 
         if login_usuario and senha_usuario != '':
             print("Cadastro de úsuario realizado com sucesso")
+            logging.info(
+                f'O Funcionário {nome_funcionario}, cadastou seu login e senha com sucesso')
         elif login_usuario or senha_usuario == '':
             print("\nErro ao cadastar login, Tente novamente\n")
+            logging.info(
+                f'O Funcionário {nome_funcionario}, Errou ao tentar se cadastrar no sistema')
 
 
 cadastro_no_sistema()
@@ -69,6 +76,8 @@ def data_registro_cracha_turno():
 
     data_registro = strftime("%d %b %Y", localtime())
     cracha_aleatorio = random.randint(1, 9999)
+    logging.info(
+        f'O crachá do funcionário {nome_funcionario} foi gerado com sucesso - {cracha_aleatorio}')
     turno_aleatorio = ["Diurno | 08:00 ás 15:00", "Noturno | 19:00 ás 02:00 "]
     cadastro_finalizado = (
         f'Olá {nome_funcionario}, o seu registro foi concluido com SUCESSO no dia {data_registro}, O seu número de crachá virtual foi gerado : {cracha_aleatorio}')
@@ -102,16 +111,21 @@ def login_sistema():
                 senha = int(
                     input("Digite aqui a sua senha: "))
                 break
-            except ValueError:
+            except ValueError as error:
                 print("Error: 001 (Sua senha deve possuir apenas números)")
+                logging.warning(error)
                 continue
 
         if nome == login_usuario:
             if senha == senha_usuario:
                 print("Login Realizado com sucesso")
+                logging.info(
+                    f'O funcionario {nome_funcionario} de username {login_usuario}, entrou com sucesso no sistema')
                 break
             else:
                 print("Houve um problema, porfavor tente novamente!")
+                logging.info(
+                    f'O funcionario {nome_funcionario} de username {login_usuario}, Errou a combnação correta para entrar no sistema')
                 continue
         else:
             print("Houve um problema, porfavor tente novamente!")
@@ -141,3 +155,5 @@ def dicionario_do_funcionario():
 
 
 dicionario_do_funcionario()
+
+# %%

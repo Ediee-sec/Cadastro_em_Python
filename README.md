@@ -81,3 +81,5 @@ login_sistema()
 1.5 | 04/02/2021 - Adicionado painel com informações do funcionario caso o login for True, criando um dicionário para a aplicação
 
 1.6 | 09/02/2021 - Adcionado exeções para tratar possíveis erros
+
+1.7 | 10/02/2021 - Adicionado arquivo de Logging, para controle de acesso e erros
