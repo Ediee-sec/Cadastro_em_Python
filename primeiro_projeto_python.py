@@ -7,8 +7,18 @@ import random
 logging.basicConfig(level=logging.DEBUG, filename='registro.log',
                     filemode='a', format='%(levelname)s - %(message)s - %(asctime)s')
 
-nome_funcionario = input("Digite o seu Nome e Sobrenome: ")
-array_funcionarios = [nome_funcionario]
+
+class info_colab:
+    def __init__(self):
+        self.nome_funcionario = ''
+        self.login_usuario = ''
+        self.senha_usuario = ''
+
+
+detalhes_func = info_colab()
+
+detalhes_func.nome_funcionario = input("Digite o seu Nome e Sobrenome: ")
+array_funcionarios = [detalhes_func.nome_funcionario]
 
 
 # Esta função armazena a data de nascimento do úsuario e faz o calculo para determinar a sua idade.
@@ -27,12 +37,8 @@ idade_aniversario_func()
 
 # Esta função faz o cadastro do úsuario no sistema, com login e senha, verificando se os campos possuem strings ou inteiros
 def cadastro_no_sistema():
-    global login_usuario
-    global senha_usuario
-    login_usuario = ''
-    senha_usuario = ''
-    while login_usuario is senha_usuario == '':
-        login_usuario = input("Escolha o Nickname: ")
+    while detalhes_func.login_usuario is detalhes_func.senha_usuario == '':
+        detalhes_func.login_usuario = input("Escolha o Nickname: ")
 
         while True:
             try:
@@ -44,14 +50,14 @@ def cadastro_no_sistema():
                 logging.warning(error)
                 continue
 
-        if login_usuario and senha_usuario != '':
+        if detalhes_func.login_usuario and senha_usuario != '':
             print("Cadastro de úsuario realizado com sucesso")
             logging.info(
-                f'O Funcionário {nome_funcionario}, cadastou seu login e senha com sucesso')
-        elif login_usuario or senha_usuario == '':
+                f'O Funcionário {detalhes_func.nome_funcionario}, cadastou seu login e senha com sucesso')
+        elif detalhes_func.login_usuario or senha_usuario == '':
             print("\nErro ao cadastar login, Tente novamente\n")
             logging.info(
-                f'O Funcionário {nome_funcionario}, Errou ao tentar se cadastrar no sistema')
+                f'O Funcionário {detalhes_func.nome_funcionario}, Errou ao tentar se cadastrar no sistema')
 
 
 cadastro_no_sistema()
@@ -59,10 +65,10 @@ cadastro_no_sistema()
 
 # Função para uma futura altualização do sistema, não deixará que tenha mais de 2 nicknames iguais no sistema
 def verificacao_nickname_duplo():
-    login_duplicado = [login_usuario]
+    login_duplicado = [detalhes_func.login_usuario]
     set_login = set(login_duplicado)
 
-    set_login.add(login_usuario)
+    set_login.add(detalhes_func.login_usuario)
     # print(set_login)
 
 
@@ -77,10 +83,10 @@ def data_registro_cracha_turno():
     data_registro = strftime("%d %b %Y", localtime())
     cracha_aleatorio = random.randint(1, 9999)
     logging.info(
-        f'O crachá do funcionário {nome_funcionario} foi gerado com sucesso - {cracha_aleatorio}')
+        f'O crachá do funcionário {detalhes_func.nome_funcionario} foi gerado com sucesso - {cracha_aleatorio}')
     turno_aleatorio = ["Diurno | 08:00 ás 15:00", "Noturno | 19:00 ás 02:00 "]
     cadastro_finalizado = (
-        f'Olá {nome_funcionario}, o seu registro foi concluido com SUCESSO no dia {data_registro}, O seu número de crachá virtual foi gerado : {cracha_aleatorio}')
+        f'\nOlá {detalhes_func.nome_funcionario}, o seu registro foi concluido com SUCESSO no dia {data_registro}, O seu número de crachá virtual foi gerado : {cracha_aleatorio}')
 
     print(cadastro_finalizado)
 
@@ -116,16 +122,16 @@ def login_sistema():
                 logging.warning(error)
                 continue
 
-        if nome == login_usuario:
-            if senha == senha_usuario:
+        if nome == detalhes_func.login_usuario:
+            if senha == detalhes_func.senha_usuario:
                 print("Login Realizado com sucesso")
                 logging.info(
-                    f'O funcionario {nome_funcionario} de username {login_usuario}, entrou com sucesso no sistema')
+                    f'O funcionario {detalhes_func.nome_funcionario} de username {detalhes_func.login_usuario}, entrou com sucesso no sistema')
                 break
             else:
                 print("Houve um problema, porfavor tente novamente!")
                 logging.info(
-                    f'O funcionario {nome_funcionario} de username {login_usuario}, Errou a combnação correta para entrar no sistema')
+                    f'O funcionario {detalhes_func.nome_funcionario} de username {detalhes_func.login_usuario}, Errou a combnação correta para entrar no sistema')
                 continue
         else:
             print("Houve um problema, porfavor tente novamente!")
@@ -137,8 +143,8 @@ login_sistema()
 
 # informações pessoais do funcionario
 def painel_sistema():
-    print(f'\nBem Vindo ao sistema interno {login_usuario}')
-    print(f'\nNome: {nome_funcionario}')
+    print(f'\nBem Vindo ao sistema interno {detalhes_func.login_usuario}')
+    print(f'\nNome: {detalhes_func.nome_funcionario}')
     print(f'idade: {resultado_idade_funcionario}')
     print(f'Crachá Virtual: {cracha_aleatorio}')
     print(f'Data de contratação: {data_registro}')
@@ -149,8 +155,8 @@ painel_sistema()
 
 # Dicionario com informações do funcionario
 def dicionario_do_funcionario():
-    dicionario = dict(nome=nome_funcionario,
-                      idade=resultado_idade_funcionario, login=login_usuario)
+    dicionario = dict(nome=detalhes_func.nome_funcionario,
+                      idade=resultado_idade_funcionario, login=detalhes_func.login_usuario)
     # print(dicionario)
 
 
