@@ -1,14 +1,13 @@
-## Sistema de cadastramento
+# %%
+from time import strftime, localtime
+from datetime import datetime
+import logging
+import random
 
-* #### *Contexto da aplicação:*
+logging.basicConfig(level=logging.DEBUG, filename='registro.log',
+                    filemode='a', format='%(levelname)s - %(message)s - %(asctime)s')
 
-*Programa que cadastra x Funcionários, no sistema interno da empresa, solicita ao úsuario informações e com essas informações toma ações, baseadas nos dados do funcionário*
 
-* #### *Mapa do código:*
-
-1. **Classe que armazena as informações do funcionário**
-
-```Python
 class info_colab:
     def __init__(self):
         self.nome_funcionario = ''
@@ -17,12 +16,12 @@ class info_colab:
 
 
 detalhes_func = info_colab()
-```
-___
 
-2. **Função que solicita ao usuario a sua data de nascimento e apartir da informação. faz o calculo para identicar a sua idade, que será usada posteriormente no algoritimo**
+detalhes_func.nome_funcionario = input("Digite o seu Nome e Sobrenome: ")
+array_funcionarios = [detalhes_func.nome_funcionario]
 
-```Python
+
+# Esta função armazena a data de nascimento do úsuario e faz o calculo para determinar a sua idade.
 def idade_aniversario_func():
 
     data_aniversario_funcionario = datetime.strptime(
@@ -34,19 +33,16 @@ def idade_aniversario_func():
 
 
 idade_aniversario_func()
-``` 
 
-___
 
-3. **Função que faz o cadastro do usuario no sistema, com login e senha**
-```Python
+# Esta função faz o cadastro do úsuario no sistema, com login e senha, verificando se os campos possuem strings ou inteiros
 def cadastro_no_sistema():
     while detalhes_func.login_usuario is detalhes_func.senha_usuario == '':
         detalhes_func.login_usuario = input("Escolha o Nickname: ")
 
         while True:
             try:
-                senha_usuario = int(
+                detalhes_func.senha_usuario = int(
                     input("Escolha uma senha [Apenas números]: "))
                 break
             except ValueError as error:
@@ -54,24 +50,32 @@ def cadastro_no_sistema():
                 logging.warning(error)
                 continue
 
-        if detalhes_func.login_usuario and senha_usuario != '':
+        if detalhes_func.login_usuario and detalhes_func.senha_usuario != '':
             print("Cadastro de úsuario realizado com sucesso")
             logging.info(
                 f'O Funcionário {detalhes_func.nome_funcionario}, cadastou seu login e senha com sucesso')
-        elif detalhes_func.login_usuario or senha_usuario == '':
+        elif detalhes_func.login_usuario or detalhes_func.senha_usuario == '':
             print("\nErro ao cadastar login, Tente novamente\n")
             logging.info(
                 f'O Funcionário {detalhes_func.nome_funcionario}, Errou ao tentar se cadastrar no sistema')
 
 
 cadastro_no_sistema()
-```
 
-___
 
-4. **Função para armazenar a data de registro do funcionário + sortear um crachá aleatório + sortear um turno baseado na função idade_aniversario_func()**
+# Função para uma futura altualização do sistema, não deixará que tenha mais de 2 nicknames iguais no sistema
+def verificacao_nickname_duplo():
+    login_duplicado = [detalhes_func.login_usuario]
+    set_login = set(login_duplicado)
 
-```Python
+    set_login.add(detalhes_func.login_usuario)
+    # print(set_login)
+
+
+verificacao_nickname_duplo()
+
+
+# Função para armazenar a data de registro do funcionário + sortear um crachá aleatório + sortear um turno baseado na função idade_aniversario_func()
 def data_registro_cracha_turno():
     global data_registro
     global cracha_aleatorio
@@ -98,13 +102,9 @@ def data_registro_cracha_turno():
 
 
 data_registro_cracha_turno()
-```
 
-___
 
-5. **Função para logar o usuario no sistema, verifica se o login e senha são os mesmos do cadastro**
-
-```Python
+# Função para logar o usuario no sistema, verifica se o login e senha são os mesmos do cadastro
 def login_sistema():
 
     while True:
@@ -139,24 +139,27 @@ def login_sistema():
 
 
 login_sistema()
-```
 
-* ## *Updates:*
 
-1.0 | 29/01/2021 - Otimização do código, encurtado utilizando a semântica correta da linguagem.
+# informações pessoais do funcionario
+def painel_sistema():
+    print(f'\nBem Vindo ao sistema interno {detalhes_func.login_usuario}')
+    print(f'\nNome: {detalhes_func.nome_funcionario}')
+    print(f'idade: {resultado_idade_funcionario}')
+    print(f'Crachá Virtual: {cracha_aleatorio}')
+    print(f'Data de contratação: {data_registro}')
 
-1.1 | 29/01/2021 - Adicionado as condicionais [if-elif-else]
 
-1.2 | 30/01/2021 - Adicionado documentação do código em Markedowm
+painel_sistema()
 
-1.3 | 30/01/2021 - Adicionado cadastro no sistema interno
 
-1.4 | 01/02/2021 - Adicionado sistema de login no sistema interno
+# Dicionario com informações do funcionario
+def dicionario_do_funcionario():
+    dicionario = dict(nome=detalhes_func.nome_funcionario,
+                      idade=resultado_idade_funcionario, login=detalhes_func.login_usuario)
+    # print(dicionario)
 
-1.5 | 04/02/2021 - Adicionado painel com informações do funcionario caso o login for True, criando um dicionário para a aplicação
 
-1.6 | 09/02/2021 - Adcionado exeções para tratar possíveis erros
+dicionario_do_funcionario()
 
-1.7 | 10/02/2021 - Adicionado arquivo de Logging, para controle de acesso e erros
-
-1.8 | 11/02/2021 - Adicionado uma classe para armazenar as informações do colaborador
+# %%
